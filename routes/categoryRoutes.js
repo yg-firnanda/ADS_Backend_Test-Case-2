@@ -11,9 +11,9 @@ const {
 } = require('../controllers/categoryController');
 
 router.get('/', getAllCategories);
-router.get('/:categorySlug', getCategory);
+router.get('/:categoryId', getCategory);
 router.post('/add', postAddCategory);
-router.patch('/:categorySlug/edit', patchEditCategory);
-router.delete('/:categorySlug/delete', deleteCategory);
+router.patch('/:categoryId/edit', patchEditCategory);
+router.delete('/:categoryId/delete', deleteCategory);
 
 module.exports = router;

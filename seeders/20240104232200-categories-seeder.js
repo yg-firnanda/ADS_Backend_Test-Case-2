@@ -6,23 +6,18 @@ module.exports = {
     await queryInterface.bulkInsert('categories', [
       {
         name: 'Elektronik',
-        slug: 'elektronik',
       },
       {
         name: 'Fashion Pria',
-        slug: 'fashion-pria',
       },
       {
         name: 'Fashion Wanita',
-        slug: 'fashion-wanita',
       },
       {
         name: 'Handphone & Tablet',
-        slug: 'handphone-&-tablet',
       },
       {
         name: 'Olahraga',
-        slug: 'olahraga',
       },
     ], {});
   },

@@ -1,9 +1,22 @@
 const {default: slugify} = require('slugify');
 const Product = require('../models/productModel');
+const ProductAsset = require('../models/productAssetModel');
+const Category = require('../models/categoryModel');
 
 exports.getAllProducts = async (req, res) => {
   try {
-    const products = await Product.findAll();
+    const products = await Product.findAll({
+      include: [
+        {
+          model: Category,
+          attributes: ['name'],
+        },
+        {
+          model: ProductAsset,
+          attributes: ['image'],
+        },
+      ],
+    });
 
     return res.status(200).json({
       success: true,

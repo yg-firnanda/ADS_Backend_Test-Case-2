@@ -13,10 +13,6 @@ const Category = sequelize.define('Category', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  slug: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
 }, {
   timestamps: false,
   tableName: 'categories',

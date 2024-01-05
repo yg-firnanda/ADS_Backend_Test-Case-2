@@ -21,11 +21,9 @@ exports.getAllCategories = async (req, res) => {
 
 exports.getCategory = async (req, res) => {
   try {
-    const {categorySlug} = req.params;
+    const {categoryId} = req.params;
 
-    const category = await Category.findOne({
-      where: {slug: categorySlug},
-    });
+    const category = await Category.findByPk(categoryId);
 
     if (!category) {
       return res.status(404).json({
@@ -88,11 +86,9 @@ exports.postAddCategory = async (req, res) => {
 
 exports.patchEditCategory = async (req, res) => {
   try {
-    const {categorySlug} = req.params;
+    const {categoryId} = req.params;
 
-    const category = await Category.findOne({
-      where: {slug: categorySlug},
-    });
+    const category = await Category.findByPk(categoryId);
 
     if (!category) {
       return res.status(404).json({
@@ -121,7 +117,7 @@ exports.patchEditCategory = async (req, res) => {
       name,
       slug,
     }, {
-      where: {slug: categorySlug},
+      where: {id: categoryId},
     });
 
     return res.status(200).json({
@@ -143,11 +139,9 @@ exports.patchEditCategory = async (req, res) => {
 
 exports.deleteCategory = async (req, res) => {
   try {
-    const {categorySlug} = req.params;
+    const {categoryId} = req.params;
 
-    const category = await Category.findOne({
-      where: {slug: categorySlug},
-    });
+    const category = await Category.findByPk(categoryId);
 
     if (!category) {
       return res.status(404).json({
@@ -157,7 +151,7 @@ exports.deleteCategory = async (req, res) => {
     }
 
     await Category.destroy({
-      where: {slug: categorySlug},
+      where: {id: categoryId},
     });
 
     return res.status(200).json({

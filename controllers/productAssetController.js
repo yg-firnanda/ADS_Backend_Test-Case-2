@@ -3,7 +3,12 @@ const Product = require('../models/productModel');
 
 exports.getAllProductAssets = async (req, res) => {
   try {
-    const productAssets = await ProductAsset.findAll();
+    const productAssets = await ProductAsset.findAll({
+      include: {
+        model: Product,
+        attributes: ['name', 'slug', 'price', 'category_id'],
+      },
+    });
 
     res.status(200).json({
       success: true,
