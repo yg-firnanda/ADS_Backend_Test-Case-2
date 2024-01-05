@@ -64,11 +64,9 @@ exports.postAddProductAsset = async (req, res) => {
       });
     }
 
-    const images = req.files.map((file) => (
-      {
-        image: file.filename,
-      }
-    ));
+    const images = req.files.map((file) => ({
+      image: file.filename,
+    }));
 
     const productAssets = await ProductAsset.bulkCreate(
         images.map((img) => ({
@@ -93,6 +91,7 @@ exports.postAddProductAsset = async (req, res) => {
     });
   }
 };
+
 
 exports.patchEditProductAsset = async (req, res) => {
   try {
