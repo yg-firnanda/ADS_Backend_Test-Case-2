@@ -5,18 +5,36 @@ const Category = require('../models/categoryModel');
 
 exports.getAllProducts = async (req, res) => {
   try {
-    const products = await Product.findAll({
-      include: [
-        {
-          model: Category,
-          attributes: ['name'],
-        },
-        {
-          model: ProductAsset,
-          attributes: ['image'],
-        },
-      ],
-    });
+    const {sort} = req.query;
+
+    let products;
+
+    const productIncludes = [
+      {
+        model: Category,
+        attributes: ['name'],
+      },
+      {
+        model: ProductAsset,
+        attributes: ['image'],
+      },
+    ];
+
+    if (sort === 'low-high') {
+      products = await Product.findAll({
+        order: [['price', 'ASC']],
+        include: productIncludes,
+      });
+    } else if (sort === 'high-low') {
+      products = await Product.findAll({
+        order: [['price', 'DESC']],
+        include: productIncludes,
+      });
+    } else {
+      products = await Product.findAll({
+        include: productIncludes,
+      });
+    }
 
     return res.status(200).json({
       success: true,
